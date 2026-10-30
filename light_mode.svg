@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" font-family="Consolas, 'Courier New', Menlo, monospace" width="985" height="515" font-size="14px">
+<style>
+.key { fill: #953800; }
+.val { fill: #0550ae; }
+.dot { fill: #57606a; }
+.add { fill: #1a7f37; }
+.del { fill: #cf222e; }
+.txt { fill: #24292f; }
+text, tspan { white-space: pre; }
+</style>
+<rect width="985" height="515" fill="#f6f8fa" rx="12"/>
+<text x="20" y="30" fill="#24292f" class="txt">
+  <tspan x="20" y="30">          ]hmwpljpq|;]:            </tspan>
+  <tspan x="365" y="30">krish@rollerblader —————————————————————————————————————————</tspan>
+  <tspan x="20" y="49">       ]ibH@llqqM@@@Mlwi&#x27;,i|!!,;   </tspan>
+  <tspan x="365" y="49"><tspan class="dot">. </tspan><tspan class="key">OS:</tspan><tspan class="dot"> ..................... </tspan><tspan class="val">macOS Sequoia, Linux, Windows 11</tspan></tspan>
+  <tspan x="20" y="68">     :kqNM@@bjqmqmHHMmjgM@@%@@MMb  </tspan>
+  <tspan x="365" y="68"><tspan class="dot">. </tspan><tspan class="key">Uptime:</tspan><tspan class="dot"> ....................... </tspan><tspan class="val">16 years, 5 months, 7 days</tspan></tspan>
+  <tspan x="20" y="87">  ;ljgpkmMMHNpN%%@MNmM%qNM%gN@@@@M </tspan>
+  <tspan x="365" y="87"><tspan class="dot">. </tspan><tspan class="key">Host:</tspan><tspan class="dot"> .............. </tspan><tspan class="val">Rock Hill High School (Class of 2028)</tspan></tspan>
+  <tspan x="20" y="106"> ;wbHlbHH;im%@Nk@@@bwp%%N%H@MHH@@@q</tspan>
+  <tspan x="365" y="106"><tspan class="dot">. </tspan><tspan class="key">Kernel:</tspan><tspan class="dot"> ................. </tspan><tspan class="val">AI Lead (FRC) &amp; DriveLab Founder</tspan></tspan>
+  <tspan x="20" y="125"> !pwmi;plqH@%@kkgHj|kMmH%wwgMN%@N@|</tspan>
+  <tspan x="365" y="125"><tspan class="dot">. </tspan><tspan class="key">IDE:</tspan><tspan class="dot"> ............................. </tspan><tspan class="val">Cursor, VS Code, Neovim</tspan></tspan>
+  <tspan x="20" y="144"> qljhHj iq%%@@@%M%%%N%@@@MmM@@@M%@;</tspan>
+  <tspan x="20" y="163"> gmqqlN@@@%@%@%%%HNHHkmM%%@@@@%N@| </tspan>
+  <tspan x="365" y="163"><tspan class="dot">. </tspan><tspan class="key">Languages.Programming:</tspan><tspan class="dot"> ...... </tspan><tspan class="val">Python, TypeScript, C++, SQL</tspan></tspan>
+  <tspan x="20" y="182"> ;Mhjj@@bw!            .w%M%@@@%@  </tspan>
+  <tspan x="365" y="182"><tspan class="dot">. </tspan><tspan class="key">Languages.Computer:</tspan><tspan class="dot"> ......... </tspan><tspan class="val">HTML, CSS, JSON, LaTeX, YAML</tspan></tspan>
+  <tspan x="20" y="201">  .@@j@j   .qpqi`  &#x27;;bgMNppj`H@@M  </tspan>
+  <tspan x="365" y="201"><tspan class="dot">. </tspan><tspan class="key">Languages.Real:</tspan><tspan class="dot"> ................. </tspan><tspan class="val">English, Gujarati, Hindi</tspan></tspan>
+  <tspan x="20" y="220">  ]g%%N  ;wmM@@Mh  !N@@HgkgHp`%@N; </tspan>
+  <tspan x="20" y="239">  k: b:  i||M@@H:  lH@HgMHHNb pNN] </tspan>
+  <tspan x="365" y="239"><tspan class="dot">. </tspan><tspan class="key">Hobbies.Software:</tspan><tspan class="dot"> ........ </tspan><tspan class="val">Computer Vision, Multi-Agent AI</tspan></tspan>
+  <tspan x="20" y="258">  ]j;w`    |bkh    .kHmwh|;:i:q@b  </tspan>
+  <tspan x="365" y="258"><tspan class="dot">. </tspan><tspan class="key">Hobbies.Hardware:</tspan><tspan class="dot"> ...... </tspan><tspan class="val">High-Power Rocketry, FRC Robotics</tspan></tspan>
+  <tspan x="20" y="277">   |Hi     `::;     lpmq,&#x27;`i||jM|  </tspan>
+  <tspan x="20" y="296">    j!     !N@k &#x27;;,b%HNHNhhbphkp;  </tspan>
+  <tspan x="365" y="296">- Contact ——————————————————————————————————————————————————</tspan>
+  <tspan x="20" y="315">     |i:;,q@@w &#x27;.!pkNgpN@NmHgjl;   </tspan>
+  <tspan x="365" y="315"><tspan class="dot">. </tspan><tspan class="key">Email.Personal:</tspan><tspan class="dot"> ................. </tspan><tspan class="val">bharadiyakrish@gmail.com</tspan></tspan>
+  <tspan x="20" y="334">       ;qhhNHNNq!:iqbH%%HNH%w      </tspan>
+  <tspan x="365" y="334"><tspan class="dot">. </tspan><tspan class="key">Web.Nonprofit:</tspan><tspan class="dot"> ..................... </tspan><tspan class="val">driverlab.netlify.app</tspan></tspan>
+  <tspan x="20" y="353">        ;qjbm;`&#x27;   `lkNgN%@N       </tspan>
+  <tspan x="365" y="353"><tspan class="dot">. </tspan><tspan class="key">Web.Rocketry:</tspan><tspan class="dot"> ................. </tspan><tspan class="val">rocky-rocketry.netlify.app</tspan></tspan>
+  <tspan x="20" y="372">         !qwh`  ;wppgNgNHM%:       </tspan>
+  <tspan x="365" y="372"><tspan class="dot">. </tspan><tspan class="key">LinkedIn:</tspan><tspan class="dot"> ...................... </tspan><tspan class="val">krish-bharadiya-408137320</tspan></tspan>
+  <tspan x="20" y="391">         |;:li&#x27;`,;||lwgH%%%]       </tspan>
+  <tspan x="365" y="391"><tspan class="dot">. </tspan><tspan class="key">Devpost:</tspan><tspan class="dot"> .................................. </tspan><tspan class="val">bharadiyakrish</tspan></tspan>
+  <tspan x="20" y="410">        ;q.&#x27;:ii;|wmgH%@@@@@;       </tspan>
+  <tspan x="20" y="429">  ;]ljli;:...  :hkH@@@@%%@@qpgw]   </tspan>
+  <tspan x="365" y="429">- GitHub Stats —————————————————————————————————————————————</tspan>
+  <tspan x="20" y="448">|H@@%     .:i;``:!lwNHNpk@@l.@@@@k|</tspan>
+  <tspan x="365" y="448"><tspan class="dot">. </tspan><tspan class="key">Repos:</tspan><tspan class="dot"> .... </tspan><tspan class="val">25</tspan> {<tspan class="key">Contributed:</tspan> <tspan class="val">28</tspan>} | <tspan class="key">Stars:</tspan><tspan class="dot"> .............. </tspan><tspan class="val">19</tspan></tspan>
+  <tspan x="20" y="467">@@@@@     &#x27;;|ll|lhwbmmkwjwNqH@@@@@@</tspan>
+  <tspan x="365" y="467"><tspan class="dot">. </tspan><tspan class="key">Commits:</tspan><tspan class="dot"> ................. </tspan><tspan class="val">1,420</tspan> | <tspan class="key">Hackathons:</tspan><tspan class="dot"> .. </tspan><tspan class="val">1st Place</tspan></tspan>
+  <tspan x="20" y="486">@%@@@@!    ilhqqwppppql|iwH@@@@@@@@</tspan>
+  <tspan x="365" y="486"><tspan class="dot">. </tspan><tspan class="key">Lines of Code on GitHub:</tspan> <tspan class="val">148,520</tspan> ( <tspan class="add">174,810++</tspan>,   <tspan class="del">26,290--</tspan> )</tspan>
+</text>
+</svg>

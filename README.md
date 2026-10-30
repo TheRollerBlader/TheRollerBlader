@@ -1,103 +1,62 @@
-# Krish Bharadiya (@TheRollerBlader)
-<div align="center">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/TheRollerBlader/TheRollerBlader/main/dark_mode.svg">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/TheRollerBlader/TheRollerBlader/main/light_mode.svg">
+  <img alt="Krish Bharadiya (@TheRollerBlader) fastfetch profile" src="https://raw.githubusercontent.com/TheRollerBlader/TheRollerBlader/main/dark_mode.svg" width="100%">
+</picture>
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=12,18,24&height=220&section=header&text=Krish%20Bharadiya&fontSize=52&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=AI%20%7C%20Robotics%20Computer%20Vision%20%7C%20Scientific%20ML%20%7C%20Spatial%20Engines&descAlignY=62&descSize=19" width="100%" />
+<details>
+<summary>Plaintext / Markdown Terminal Block (if not using SVG files)</summary>
 
-[![GitHub followers](https://img.shields.io/github/followers/TheRollerBlader?label=Followers&style=for-the-badge&color=00d26a&logo=github)](https://github.com/TheRollerBlader)
-[![Total Commits](https://img.shields.io/badge/Daily_Commits-Autonomous_High_Leverage-blue?style=for-the-badge&logo=git)](https://github.com/TheRollerBlader)
-[![Public Repos](https://img.shields.io/badge/Public_Repositories-25-orange?style=for-the-badge&logo=github)](https://github.com/TheRollerBlader?tab=repositories)
-
-</div>
-
----
-
-### 🚀 Engineering Philosophy & Focus
-
-I build end-to-end intelligent systems at the intersection of **deep learning, spatial mathematics, real-time robotics vision, and high-performance web graphics**. My engineering roadmap is driven by production-grade autonomy—shipping daily verified tests, edge neural acceleration, and resilient interactive tools.
-
-- 🔬 **Scientific Machine Learning**: Graph Kolmogorov-Arnold Networks (GKANs) for geomagnetic storm forecasting ($L_1$ Lagrange point solar wind data & SuperMAG magnetometer arrays).
-- 👁️ **Computer Vision & Robotics**: Real-time robot trajectory reconstruction, multi-object tracking (ByteTrack/OC-SORT), and 4-point homography projection for FIRST Robotics Competition.
-- 🤟 **Assistive AI & Multimodal Interfaces**: Bidirectional ASL translation pipelines using MediaPipe hand landmarkers, ONNX Runtime WebGL client-side inference, and temporal sequence models.
-- 🚀 **Aerospace & Physics Simulation**: 6-DOF ballistic rocket trajectory simulation (RK4 integrator) and Web Serial hardware telemetry for the American Rocketry Challenge.
-- 📊 **Spatial Systems & Interactive Visualizers**: Real-time hydrological flood prediction, WebGL particle flow engines, and high-dimensional financial/spatial manifolds.
-
----
-
-### 🌟 Flagship Projects & Engineering Portfolio
-
-<table>
-  <tr>
-    <td width="50%" valign="top">
-      <h4><a href="https://github.com/TheRollerBlader/SignBridge">🤟 SignBridge</a></h4>
-      <p><em>Real-Time Bidirectional ASL Communication Engine</em></p>
-      <p>Bridges the communication gap between Deaf and hearing communities. Features 21-keypoint MediaPipe hand landmark tracking, client-side ONNX Runtime WebGL inference, and reciprocal speech-to-sign visual glossing.</p>
-      <p><code>TypeScript</code> · <code>PyTorch</code> · <code>ONNX</code> · <code>MediaPipe</code> · <code>FastAPI</code></p>
-    </td>
-    <td width="50%" valign="top">
-      <h4><a href="https://github.com/TheRollerBlader/st-pc-uq-gkan">🌌 st-pc-uq-gkan</a></h4>
-      <p><em>Physics-Constrained Graph Kolmogorov-Arnold Network</em></p>
-      <p>Deep learning architecture for predicting localized geomagnetic disturbance ($\Delta B$) and Geomagnetically Induced Currents (GIC) from NOAA SWPC solar wind feeds with calibrated conformal uncertainty quantification.</p>
-      <p><code>PyTorch</code> · <code>Graph KAN</code> · <code>Scientific ML</code> · <code>Geophysics</code></p>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" valign="top">
-      <h4><a href="https://github.com/TheRollerBlader/frc-vision-scout">🤖 frc-vision-scout</a></h4>
-      <p><em>Autonomous Multi-Robot Field Vision & Analytics</em></p>
-      <p>Computer vision tracking pipeline utilizing YOLO11, homography projection, and temporal bumper OCR to reconstruct complete match trajectories and cycle times on FRC fields.</p>
-      <p><code>Python</code> · <code>YOLO11</code> · <code>OpenCV</code> · <code>ByteTrack</code> · <code>Robotics</code></p>
-    </td>
-    <td width="50%" valign="top">
-      <h4><a href="https://github.com/TheRollerBlader/rocky">🚀 Rocky</a></h4>
-      <p><em>High-Power Rocketry Flight Physics & Telemetry</em></p>
-      <p>Interactive platform built for the American Rocketry Challenge featuring 6-DOF RK4 trajectory simulation, motor thrust curve parsing (<code>.rse</code>/<code>.eng</code>), and Web Serial altimeter link.</p>
-      <p><code>Next.js</code> · <code>Three.js</code> · <code>Web Serial</code> · <code>Physics Simulation</code></p>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" valign="top">
-      <h4><a href="https://github.com/TheRollerBlader/flood-alert">🌊 flood-alert</a></h4>
-      <p><em>North Texas Hydrological Forecasting & Hazard Alerts</em></p>
-      <p>Live alert utility monitoring low-water crossing inundation across Prosper, Frisco, and McKinney using USGS river hydrograph feeds and NWS radar integrations.</p>
-      <p><code>TypeScript</code> · <code>Vitest</code> · <code>GIS / Leaflet</code> · <code>USGS API</code></p>
-    </td>
-    <td width="50%" valign="top">
-      <h4><a href="https://github.com/TheRollerBlader/crypto-trading-llm">📈 crypto-trading-llm</a></h4>
-      <p><em>Quantitative Market Sentiment & Algorithmic Strategy</em></p>
-      <p>Event-driven backtesting engine synthesizing LLM market sentiment with strict Pydantic validation, Kelly Criterion risk sizing, and stop-loss circuit breakers.</p>
-      <p><code>Python</code> · <code>FastAPI</code> · <code>Pydantic</code> · <code>Algorithmic Finance</code></p>
-    </td>
-  </tr>
-</table>
-
----
-
-### 🛠️ Core Technology & Tooling Stack
-
-```
-Languages:        Python 3.11+, TypeScript, JavaScript, SQL, C++, HTML5/CSS3
-AI / ML:          PyTorch, ONNX Runtime, Ultralytics YOLO, MediaPipe, Scikit-Learn, SciPy
-Graphics / 3D:    Three.js, WebGL / GLSL, D3.js, Recharts, Canvas API
-Web & Backend:    FastAPI, React 19, Next.js, Vite, Node.js, Tailwind CSS
-Robotics & Vision:OpenCV, ByteTrack, Homography Calibration, Web Serial API, ROS
-Infrastructure:   Docker, GitHub Actions CI/CD, Vitest, Pytest, Netlify, Vercel
+```text
+          ]hmwpljpq|;]:               krish@rollerblader —————————————————————————————————————————
+       ]ibH@llqqM@@@Mlwi',i|!!,;      . OS: ..................... macOS Sequoia, Linux, Windows 11
+     :kqNM@@bjqmqmHHMmjgM@@%@@MMb     . Uptime: ....................... 16 years, 5 months, 7 days
+  ;ljgpkmMMHNpN%%@MNmM%qNM%gN@@@@M    . Host: .............. Rock Hill High School (Class of 2028)
+ ;wbHlbHH;im%@Nk@@@bwp%%N%H@MHH@@@q   . Kernel: ................. AI Lead (FRC) & DriveLab Founder
+ !pwmi;plqH@%@kkgHj|kMmH%wwgMN%@N@|   . IDE: ............................. Cursor, VS Code, Neovim
+ qljhHj iq%%@@@%M%%%N%@@@MmM@@@M%@;
+ gmqqlN@@@%@%@%%%HNHHkmM%%@@@@%N@|    . Languages.Programming: ...... Python, TypeScript, C++, SQL
+ ;Mhjj@@bw!            .w%M%@@@%@     . Languages.Computer: ......... HTML, CSS, JSON, LaTeX, YAML
+  .@@j@j   .qpqi`  ';bgMNppj`H@@M     . Languages.Real: ................. English, Gujarati, Hindi
+  ]g%%N  ;wmM@@Mh  !N@@HgkgHp`%@N;
+  k: b:  i||M@@H:  lH@HgMHHNb pNN]    . Hobbies.Software: ........ Computer Vision, Multi-Agent AI
+  ]j;w`    |bkh    .kHmwh|;:i:q@b     . Hobbies.Hardware: ...... High-Power Rocketry, FRC Robotics
+   |Hi     `::;     lpmq,'`i||jM|
+    j!     !N@k ';,b%HNHNhhbphkp;     - Contact ——————————————————————————————————————————————————
+     |i:;,q@@w '.!pkNgpN@NmHgjl;      . Email.Personal: ................. bharadiyakrish@gmail.com
+       ;qhhNHNNq!:iqbH%%HNH%w         . Web.Nonprofit: ..................... driverlab.netlify.app
+        ;qjbm;`'   `lkNgN%@N          . Web.Rocketry: ................. rocky-rocketry.netlify.app
+         !qwh`  ;wppgNgNHM%:          . LinkedIn: ...................... krish-bharadiya-408137320
+         |;:li'`,;||lwgH%%%]          . Devpost: .................................. bharadiyakrish
+        ;q.':ii;|wmgH%@@@@@;
+  ;]ljli;:...  :hkH@@@@%%@@qpgw]      - GitHub Stats —————————————————————————————————————————————
+|H@@%     .:i;``:!lwNHNpk@@l.@@@@k|   . Repos: .... 25 {Contributed: 28} | Stars: .............. 19
+@@@@@     ';|ll|lhwbmmkwjwNqH@@@@@@   . Commits: ................. 1,420 | Hackathons: .. 1st Place
+@%@@@@!    ilhqqwppppql|iwH@@@@@@@@   . Lines of Code on GitHub: 148,520 ( 174,810++,   26,290-- )
 ```
 
----
+</details>
 
-### 📊 Real-Time GitHub Engineering Analytics
+### Selected Systems & Research
 
-<div align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=TheRollerBlader&show_icons=true&theme=tokyonight&hide_border=true&count_private=true&include_all_commits=true" width="48%" />
-  <img src="https://github-readme-streak-stats.herokuapp.com/?user=TheRollerBlader&theme=tokyonight&hide_border=true" width="48%" />
-</div>
+| Project | Architecture & Technical Scope | Recognition / Status |
+| :--- | :--- | :--- |
+| **[SignBridge](https://github.com/TheRollerBlader/SignBridge)** | Real-time browser ASL-to-English translator. Extracts 21 3D hand landmarks per frame via MediaPipe, runs exponential moving-average temporal smoothing and PyTorch classification over WebSockets, and synthesizes speech with the Gemini API (~300 ms latency). | **1st Place**, Raven Hacks VTL · [Devpost](https://devpost.com/software/project-signbridge) · [Live App](https://projectsignbridge.netlify.app) |
+| **[frc-vision-scout](https://github.com/TheRollerBlader/frc-vision-scout)** & **[auto_scout](https://github.com/Prosper-FRC/auto_scout)** | Match video telemetry pipeline for FIRST Robotics Competition. Pairs YOLO11 detection with ByteTrack multi-object tracking and a 4-point planar homography solver to project broadcast footage onto 2D field coordinates and log robot cycle times. | Active deployment for [MercsMavs-MSA](https://github.com/MercsMavs-MSA) & [Prosper-FRC](https://github.com/Prosper-FRC) |
+| **[st-pc-uq-gkan](https://github.com/TheRollerBlader/st-pc-uq-gkan)** | Spatiotemporal Physics-Constrained Graph Kolmogorov-Arnold Network forecasting geomagnetic storms and Geomagnetically Induced Currents (GIC) from NOAA SWPC ($L_1$ Lagrange point) and SuperMAG magnetometer feeds with conformal prediction bounds. | **Published Abstract**, AGU Bright Stars (Aug 2026) |
+| **Synthetic Sentinels** | Hierarchical multi-agent pipeline (YOLO perception + XGBoost trajectory classification) for automated near-Earth asteroid verification. Cut human analyst latency by 71% across Unity orbital physics simulations and Monte Carlo trajectory sweeps. | **2nd Place Internationally**, ISRC · **3rd Place NSS Award**, DRSEF |
+| **[rocky](https://github.com/TheRollerBlader/rocky)** | 6-DOF flight dynamics simulator and telemetry web application for the American Rocketry Challenge, implementing 4th-order Runge-Kutta (RK4) numerical integration and `.eng`/`.rse` thrust curve parsing. | [Live Telemetry App](https://rocky-rocketry.netlify.app) |
+| **[flood-alert](https://github.com/TheRollerBlader/flood-alert)** | North Texas hydrological warning monitor tracking USGS stream gauges and precipitation feeds across Prosper, Frisco, and McKinney to model low-water crossing road hazards. | Congressional App Challenge (TX-04) |
 
-<div align="center">
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=TheRollerBlader&layout=compact&theme=tokyonight&hide_border=true&langs_count=8" width="60%" />
-</div>
+### Additional Repositories
 
----
+* **Quantitative & ML Systems**: [`crypto-trading-llm`](https://github.com/TheRollerBlader/crypto-trading-llm) (LLM market sentiment extraction & backtesting) · [`crypto-stock-candlestick-tracker`](https://github.com/TheRollerBlader/crypto-stock-candlestick-tracker) (real-time market candlestick & technical indicator tracker)
+* **WebGL & Data Visualization**: [`github-contribution-galaxy`](https://github.com/TheRollerBlader/github-contribution-galaxy) (3D WebGL procedural commit galaxy) · [`spotify-listening-dashboard`](https://github.com/TheRollerBlader/spotify-listening-dashboard) (D3.js & TypeScript streaming analytics) · [`personal-finance-sankey`](https://github.com/TheRollerBlader/personal-finance-sankey) (cash-flow waterfall & Sankey diagram builder) · [`wikipedia-link-explorer`](https://github.com/TheRollerBlader/wikipedia-link-explorer) (hyperbolic knowledge graph & shortest-path explorer)
+* **Geophysical & Algorithmic Engines**: [`global-earthquake-live-map`](https://github.com/TheRollerBlader/global-earthquake-live-map) (seismic & tectonic plate visualizer) · [`weather-pattern-explorer`](https://github.com/TheRollerBlader/weather-pattern-explorer) (isobaric jet stream explorer) · [`sorting-pathfinding-visualizer`](https://github.com/TheRollerBlader/sorting-pathfinding-visualizer) (graph traversal & sorting visualizer)
+* **Developer Tooling & Media**: [`motion-graphic-style-library`](https://github.com/TheRollerBlader/motion-graphic-style-library) (Remotion kinetic typography primitives) · [`code-repository-analyzer`](https://github.com/TheRollerBlader/code-repository-analyzer) (static dependency & topology inspector) · [`scouting-hosting`](https://github.com/TheRollerBlader/scouting-hosting) (FRC scouting web service)
 
-<div align="center">
-  <sub>Autonomous High-Leverage Engineering · Continuous Progress Across 25 Active Repositories</sub>
-</div>
+### Leadership & Engineering Programs
+
+* **[DriveLab](https://driverlab.netlify.app)** — *Founder*. Volunteer-led engineering nonprofit (501(c)(3) pending) in Prosper, TX teaching grades 6–8 mechanical and electrical fundamentals through an 8-session RC car build curriculum and district race day.
+* **Mercs Robotics ([MercsMavs-MSA](https://github.com/MercsMavs-MSA)) & [Prosper Engineering](https://github.com/Prosper-FRC)** — *AI Lead*. Leading computer vision and autonomous scouting software for competitive FIRST Robotics Competition teams.
+* **[Rock Hill ARC Rocketry](https://rocky-rocketry.netlify.app/#team)** — *Founder & Lead Designer*. Established Rock Hill High School's 9-member American Rocketry Challenge team; leads airframe CAD, stability modeling, and flight simulation.

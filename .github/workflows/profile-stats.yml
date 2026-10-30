@@ -20,14 +20,17 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Validate README Markdown & Link Integrity
+      - name: Validate README Markdown, SVGs & Link Integrity
         run: |
           python -c "
+          import os
           with open('README.md', 'r') as f:
               content = f.read()
           assert 'Krish Bharadiya' in content, 'Missing author name'
-          assert 'Flagship Projects' in content, 'Missing projects section'
+          assert 'Selected Systems & Research' in content, 'Missing projects section'
           assert 'SignBridge' in content, 'Missing SignBridge link'
           assert 'st-pc-uq-gkan' in content, 'Missing st-pc-uq-gkan link'
-          print('✓ README structure verified successfully.')
+          assert os.path.exists('dark_mode.svg'), 'Missing dark_mode.svg'
+          assert os.path.exists('light_mode.svg'), 'Missing light_mode.svg'
+          print('✓ README and SVG assets verified successfully.')
           "
