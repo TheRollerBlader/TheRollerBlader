@@ -8,31 +8,31 @@
 <summary>Plaintext / Markdown Terminal Block (if not using SVG files)</summary>
 
 ```text
-          ]hmwpljpq|;]:               krish@rollerblader —————————————————————————————————————————
-       ]ibH@llqqM@@@Mlwi',i|!!,;      . OS: ..................... macOS Sequoia, Linux, Windows 11
-     :kqNM@@bjqmqmHHMmjgM@@%@@MMb     . Uptime: ....................... 16 years, 5 months, 7 days
-  ;ljgpkmMMHNpN%%@MNmM%qNM%gN@@@@M    . Host: .............. Rock Hill High School (Class of 2028)
- ;wbHlbHH;im%@Nk@@@bwp%%N%H@MHH@@@q   . Kernel: ................. AI Lead (FRC) & DriveLab Founder
- !pwmi;plqH@%@kkgHj|kMmH%wwgMN%@N@|   . IDE: ............................. Cursor, VS Code, Neovim
- qljhHj iq%%@@@%M%%%N%@@@MmM@@@M%@;
- gmqqlN@@@%@%@%%%HNHHkmM%%@@@@%N@|    . Languages.Programming: ...... Python, TypeScript, C++, SQL
- ;Mhjj@@bw!            .w%M%@@@%@     . Languages.Computer: ......... HTML, CSS, JSON, LaTeX, YAML
-  .@@j@j   .qpqi`  ';bgMNppj`H@@M     . Languages.Real: ................. English, Gujarati, Hindi
-  ]g%%N  ;wmM@@Mh  !N@@HgkgHp`%@N;
-  k: b:  i||M@@H:  lH@HgMHHNb pNN]    . Hobbies.Software: ........ Computer Vision, Multi-Agent AI
-  ]j;w`    |bkh    .kHmwh|;:i:q@b     . Hobbies.Hardware: ...... High-Power Rocketry, FRC Robotics
-   |Hi     `::;     lpmq,'`i||jM|
-    j!     !N@k ';,b%HNHNhhbphkp;     - Contact ——————————————————————————————————————————————————
-     |i:;,q@@w '.!pkNgpN@NmHgjl;      . Email.Personal: ................. bharadiyakrish@gmail.com
-       ;qhhNHNNq!:iqbH%%HNH%w         . Web.Nonprofit: ..................... driverlab.netlify.app
-        ;qjbm;`'   `lkNgN%@N          . Web.Rocketry: ................. rocky-rocketry.netlify.app
-         !qwh`  ;wppgNgNHM%:          . LinkedIn: ...................... krish-bharadiya-408137320
-         |;:li'`,;||lwgH%%%]          . Devpost: .................................. bharadiyakrish
-        ;q.':ii;|wmgH%@@@@@;
-  ;]ljli;:...  :hkH@@@@%%@@qpgw]      - GitHub Stats —————————————————————————————————————————————
-|H@@%     .:i;``:!lwNHNpk@@l.@@@@k|   . Repos: .... 25 {Contributed: 28} | Stars: .............. 19
-@@@@@     ';|ll|lhwbmmkwjwNqH@@@@@@   . Commits: ................. 1,420 | Hackathons: .. 1st Place
-@%@@@@!    ilhqqwppppql|iwH@@@@@@@@   . Lines of Code on GitHub: 148,520 ( 174,810++,   26,290-- )
+          @%%%M%@%%MM%M%@%            krish@rollerblader —————————————————————————————————————————
+         @%@%M%@%%MMHNM%%@            . OS: ..................... macOS Sequoia, Linux, Windows 11
+       %M%%MM%MM%%M%MM%MM%MM@         . Uptime: ....................... 16 years, 5 months, 7 days
+       @%%HM%MM%MM%MM%MM%MM%%         . Host: .............. Rock Hill High School (Class of 2028)
+     %@%@HNHNMNHM%MMNMMHNHNMM%@%      . Kernel: ................. AI Lead (FRC) & DriveLab Founder
+      %@MM%MM%HM%MM@%M%MM%MM%@%       . IDE: ............................. Cursor, VS Code, Neovim
+      @%M%M%@MM%@M@%M%@%@MM%@%@
+      %@%@%@%@%@%%Hp%@HpHN%@%@%       . Languages.Programming: ...... Python, TypeScript, C++, SQL
+       @@@@@@M;qppNMM;;;NN@@@ @       . Languages.Computer: ......... HTML, CSS, JSON, LaTeX, YAML
+        @%%@@;;;qppNq;;pMNM@          . Languages.Real: ................. English, Gujarati, Hindi
+        Nppp;;:;MM;;;:;M@;@
+        ||;;;;;:;;;;;||j;;;           . Hobbies.Software: ........ Computer Vision, Multi-Agent AI
+         |;;;;;;;;;;;jjj;;;           . Hobbies.Hardware: ...... High-Power Rocketry, FRC Robotics
+          %%;;;;;;;;....;;;
+            ;;;;;;;------;            - Contact ——————————————————————————————————————————————————
+            @;;;;;;;;;;;%             . Email.Personal: ................. bharadiyakrish@gmail.com
+            @;;;;;;;;;;;              . Web.Nonprofit: ..................... driverlab.netlify.app
+          %@M;;;pMMNN@@               . Web.Rocketry: ................. rocky-rocketry.netlify.app
+       @%p:qp;;;;;qpq@pM%             . LinkedIn: ...................... krish-bharadiya-408137320
+    %Mp-....:=pp=====m:::=mM%         . Devpost: .................................. bharadiyakrish
+  %m-..........:-====:......-m
+  =.:.........................m       - GitHub Stats —————————————————————————————————————————————
+ m...........................::%      . Repos: .... 25 {Contributed: 28} | Stars: .............. 19
+%:.....:....................:..m      . Commits: ................. 1,420 | Hackathons: .. 1st Place
+m......-....................:..-%     . Lines of Code on GitHub: 148,520 ( 174,810++,   26,290-- )
 ```
 
 </details>
