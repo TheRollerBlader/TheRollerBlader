@@ -1,0 +1,175 @@
+{
+  "version": "1.0.0",
+  "generated_at": "2026-10-31T09:00:00-05:00",
+  "timezone": "America/Chicago",
+  "roadmap_source": "/Users/krish/Documents/github_automation_schedule_and_audit.md",
+  "weekday_archetypes": {
+    "Monday": {
+      "type": "architecture",
+      "name": "Architecture & Scaffolding",
+      "deliverables": "Data contracts, TypeScript interfaces, Pydantic schemas, initial file structures"
+    },
+    "Tuesday": {
+      "type": "logic",
+      "name": "Core Logic & Computation",
+      "deliverables": "Algorithmic implementations, math utilities, data transformation pipelines"
+    },
+    "Wednesday": {
+      "type": "ui",
+      "name": "UI & Visualization Components",
+      "deliverables": "React/Tailwind components, D3/Three.js render passes, responsive layouts"
+    },
+    "Thursday": {
+      "type": "integration",
+      "name": "Integration & Data Ingest",
+      "deliverables": "API endpoints, WebSocket clients, external data fetchers, state management"
+    },
+    "Friday": {
+      "type": "testing",
+      "name": "Testing & Verification",
+      "deliverables": "Vitest/Pytest unit suites, mock data fixtures, boundary condition assertions"
+    },
+    "Saturday": {
+      "type": "types_and_linting",
+      "name": "Type Safety, Linting & Polish",
+      "deliverables": "Strict type-checking (noImplicitAny), docstrings, error boundaries, styling"
+    },
+    "Sunday": {
+      "type": "cicd_and_docs",
+      "name": "CI/CD, Workflows & Docs",
+      "deliverables": "GitHub Actions workflows, README setup guides, architecture diagrams"
+    }
+  },
+  "repositories": {
+    "SignBridge": {
+      "path": "/Users/krish/Workspace/Hackathons/SignBridge",
+      "tier": 1,
+      "test_cmd": "npm test -w frontend -- --run",
+      "description": "ASL to oral communication accessibility platform"
+    },
+    "frc-vision-scout": {
+      "path": "/Users/krish/frc-vision-scout",
+      "tier": 2,
+      "test_cmd": "pytest tests/",
+      "description": "FRC robotics computer vision trajectory & scoring scout"
+    },
+    "rocky": {
+      "path": "/Users/krish/Workspace/ARC Website",
+      "tier": 2,
+      "test_cmd": "pytest simulations/",
+      "description": "American Rocketry Challenge 6-DOF simulation & web UI"
+    },
+    "TheRollerBlader": {
+      "path": "/Users/krish/Workspace/TheRollerBlader",
+      "tier": 5,
+      "test_cmd": "python3 -c 'import os; assert os.path.exists(\"README.md\")'",
+      "description": "Central developer profile and portfolio automation hub"
+    },
+    "flood-alert": {
+      "path": "/Users/krish/Workspace/Flood drone app final",
+      "tier": 3,
+      "test_cmd": "npm test",
+      "description": "North Texas hydrological forecasting & USGS gauge alerts"
+    },
+    "spotify-listening-dashboard": {
+      "path": "/Users/krish/Workspace/Vibecode Projects/spotify-listening-dashboard",
+      "tier": 4,
+      "test_cmd": "npm test",
+      "description": "Spotify Extended Streaming History analytics & D3 clustering"
+    },
+    "st-pc-uq-gkan": {
+      "path": "/Users/krish/Workspace/st-pc-uq-gkan",
+      "tier": 1,
+      "test_cmd": "pytest",
+      "description": "Geomagnetic storm and GIC hazard forecast network"
+    },
+    "crypto-trading-llm": {
+      "path": "/Users/krish/Workspace/Trading Bot",
+      "tier": 1,
+      "test_cmd": "pytest",
+      "description": "Event-driven backtesting and quantitative trading LLM"
+    },
+    "global-earthquake-live-map": {
+      "path": "/Users/krish/Workspace/Vibecode Projects/global-earthquake-live-map",
+      "tier": 3,
+      "test_cmd": "npm run build --if-present",
+      "description": "Global seismic events 3D visualizer and fault lines"
+    },
+    "weather-pattern-explorer": {
+      "path": "/Users/krish/Workspace/Vibecode Projects/weather-pattern-explorer",
+      "tier": 3,
+      "test_cmd": "npm run build --if-present",
+      "description": "WebGL wind particle flow visualizer and isobar contours"
+    },
+    "personal-finance-sankey": {
+      "path": "/Users/krish/Workspace/Vibecode Projects/personal-finance-sankey",
+      "tier": 4,
+      "test_cmd": "npm run build --if-present",
+      "description": "Client-side encrypted cash flow Sankey diagram engine"
+    },
+    "github-contribution-galaxy": {
+      "path": "/Users/krish/Workspace/Vibecode Projects/github-contribution-galaxy",
+      "tier": 4,
+      "test_cmd": "npm run build --if-present",
+      "description": "Procedural 3D WebGL GitHub commit galaxy visualizer"
+    },
+    "sorting-pathfinding-visualizer": {
+      "path": "/Users/krish/Workspace/Vibecode Projects/sorting-pathfinding-visualizer",
+      "tier": 4,
+      "test_cmd": "npm run build --if-present",
+      "description": "Interactive pathfinding & maze algorithm debugger"
+    },
+    "wikipedia-link-explorer": {
+      "path": "/Users/krish/Workspace/Vibecode Projects/wikipedia-link-explorer",
+      "tier": 4,
+      "test_cmd": "npm run build --if-present",
+      "description": "Bidirectional BFS Six Degrees of Wikipedia graph solver"
+    },
+    "crypto-stock-candlestick-tracker": {
+      "path": "/Users/krish/Workspace/Vibecode Projects/crypto-stock-candlestick-tracker",
+      "tier": 4,
+      "test_cmd": "npm run build --if-present",
+      "description": "Live WebSocket market tick-to-candle technical charts"
+    },
+    "motion-graphic-style-library": {
+      "path": "/Users/krish/Workspace/Motion graphic style library",
+      "tier": 5,
+      "test_cmd": "pytest",
+      "description": "Remotion video motion graphics & kinetic typography"
+    },
+    "code-repository-analyzer": {
+      "path": "/Users/krish/Workspace/Vibecode Projects/code-repository-analyzer",
+      "tier": 5,
+      "test_cmd": "npm run build --if-present",
+      "description": "AST structural code metrics & circular dependency detector"
+    },
+    "fitness-habit-tracker": {
+      "path": "/Users/krish/Workspace/Vibecode Projects/fitness-habit-tracker",
+      "tier": 5,
+      "test_cmd": "npm run build --if-present",
+      "description": "Offline PWA habit logger and 52-week heatmap analytics"
+    }
+  },
+  "quarters": {
+    "Q1": {
+      "name": "Year 1 Q1 (Nov 2026 - Jan 2027): Flagship AI & Vision Foundations",
+      "primary": ["SignBridge", "frc-vision-scout"],
+      "secondary": ["TheRollerBlader", "rocky", "flood-alert"]
+    },
+    "Q2": {
+      "name": "Year 1 Q2 (Feb 2027 - Apr 2027): Geospatial, Civic & Aerospace Systems",
+      "primary": ["flood-alert", "rocky", "global-earthquake-live-map"],
+      "secondary": ["Plant-App", "recall-rescue"]
+    },
+    "Q3": {
+      "name": "Year 1 Q3 (May 2027 - Jul 2027): Financial Modeling, Quantitative LLMs & Sankey",
+      "primary": ["crypto-trading-llm", "personal-finance-sankey", "crypto-stock-candlestick-tracker"],
+      "secondary": ["sorting-pathfinding-visualizer"]
+    },
+    "Q4": {
+      "name": "Year 1 Q4 (Aug 2027 - Oct 2027): Data Dashboards & 3D WebGL Visualization",
+      "primary": ["spotify-listening-dashboard", "github-contribution-galaxy"],
+      "secondary": ["wikipedia-link-explorer", "code-repository-analyzer"]
+    }
+  }
+}

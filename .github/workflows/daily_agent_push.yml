@@ -1,0 +1,48 @@
+name: Daily Autonomous Agent Engineering
+
+on:
+  schedule:
+    # Runs at 14:00 UTC (09:00 AM Central) daily
+    - cron: '0 14 * * *'
+  workflow_dispatch:
+    inputs:
+      target_repo:
+        description: 'Repository name to target'
+        required: false
+      custom_task:
+        description: 'Specific engineering task to execute'
+        required: false
+
+jobs:
+  agent-commit:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout TheRollerBlader Hub
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Validate Automation Schedule Integrity
+        run: |
+          python3 -c "
+          import json
+          with open('automation_schedule.json', 'r') as f:
+              data = json.load(f)
+          assert 'weekday_archetypes' in data, 'Missing archetypes'
+          assert 'repositories' in data, 'Missing repositories'
+          assert 'quarters' in data, 'Missing quarters'
+          print('✓ automation_schedule.json verified successfully.')
+          "
+
+      - name: Run Daily Agent Worker Audit
+        run: |
+          python3 scripts/agent_daily_worker.py --dry-run
