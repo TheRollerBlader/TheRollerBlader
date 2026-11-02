@@ -44,7 +44,7 @@
     "SignBridge": {
       "path": "/Users/krish/Workspace/Hackathons/SignBridge",
       "tier": 1,
-      "test_cmd": "npm test -w frontend -- --run",
+      "test_cmd": "npm --prefix frontend test -- --run",
       "description": "ASL to oral communication accessibility platform"
     },
     "frc-vision-scout": {
@@ -86,7 +86,7 @@
     "crypto-trading-llm": {
       "path": "/Users/krish/Workspace/Trading Bot",
       "tier": 1,
-      "test_cmd": "pytest",
+      "test_cmd": ".venv/bin/pytest tests",
       "description": "Event-driven backtesting and quantitative trading LLM"
     },
     "global-earthquake-live-map": {
@@ -134,7 +134,7 @@
     "motion-graphic-style-library": {
       "path": "/Users/krish/Workspace/Motion graphic style library",
       "tier": 5,
-      "test_cmd": "pytest",
+      "test_cmd": "PYTHONPATH=src pytest",
       "description": "Remotion video motion graphics & kinetic typography"
     },
     "code-repository-analyzer": {

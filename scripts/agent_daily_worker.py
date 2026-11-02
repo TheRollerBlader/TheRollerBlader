@@ -71,7 +71,12 @@ def determine_todays_target(schedule: Dict[str, Any], target_repo_override: Opti
 
 
 def run_command(cmd: str, cwd: str) -> subprocess.CompletedProcess:
-    return subprocess.run(cmd, shell=True, cwd=cwd, text=True, capture_output=True)
+    env = os.environ.copy()
+    env["PATH"] = (
+        "/opt/homebrew/bin:/opt/homebrew/sbin:/opt/anaconda3/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:"
+        + env.get("PATH", "")
+    )
+    return subprocess.run(cmd, shell=True, cwd=cwd, text=True, capture_output=True, env=env)
 
 
 def execute_daily_run(target_repo_override: Optional[str] = None, dry_run: bool = False):
