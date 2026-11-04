@@ -15,6 +15,22 @@ import subprocess
 from typing import Dict, Any, Optional
 
 SCHEDULE_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "automation_schedule.json")
+ENV_PATH = "/Users/krish/.env"
+
+
+def load_environment():
+    """Ensures environment variables (like GEMINI_API_KEY) are loaded from ~/.env if present."""
+    if os.path.exists(ENV_PATH):
+        try:
+            with open(ENV_PATH, "r", encoding="utf-8") as f:
+                for line in f:
+                    line = line.strip()
+                    if line and not line.startswith("#") and "=" in line:
+                        k, v = line.split("=", 1)
+                        if k.strip() not in os.environ:
+                            os.environ[k.strip()] = v.strip().strip("'\"")
+        except Exception as e:
+            print(f"! Warning loading {ENV_PATH}: {e}")
 
 
 def load_schedule() -> Dict[str, Any]:
@@ -52,7 +68,7 @@ def determine_todays_target(schedule: Dict[str, Any], target_repo_override: Opti
     quarter_key = get_current_quarter(today)
     quarter_info = schedule.get("quarters", {}).get(quarter_key, {})
     primary_repos = quarter_info.get("primary", ["SignBridge", "frc-vision-scout"])
-    secondary_repos = quarter_info.get("secondary", ["rocky", "flood-alert", "TheRollerBlader"])
+    secondary_repos = quarter_info.get("secondary", ["TheRollerBlader", "rocky", "flood-alert"])
 
     # Rotate target repository based on day of month to ensure balanced progress
     all_active = primary_repos * 2 + secondary_repos
@@ -67,6 +83,7 @@ def determine_todays_target(schedule: Dict[str, Any], target_repo_override: Opti
         "repo_name": repo_name,
         "repo_path": repo_meta.get("path"),
         "test_cmd": repo_meta.get("test_cmd", ""),
+        "description": repo_meta.get("description", ""),
     }
 
 
@@ -79,7 +96,68 @@ def run_command(cmd: str, cwd: str) -> subprocess.CompletedProcess:
     return subprocess.run(cmd, shell=True, cwd=cwd, text=True, capture_output=True, env=env)
 
 
-def execute_daily_run(target_repo_override: Optional[str] = None, dry_run: bool = False):
+def generate_micro_deliverable(target: Dict[str, Any]) -> Optional[Dict[str, Any]]:
+    """Invokes Gemini 2.5 Flash to synthesize today's scheduled micro-engineering addition."""
+    api_key = os.environ.get("GEMINI_API_KEY")
+    if not api_key:
+        print("! GEMINI_API_KEY not set in environment or ~/.env; skipping autonomous code generation.")
+        return None
+
+    try:
+        from google import genai
+        from google.genai import types
+
+        client = genai.Client(api_key=api_key)
+        repo_path = target["repo_path"]
+
+        # Gather directory listing to give context
+        file_tree = run_command(
+            "find . -maxdepth 3 -not -path '*/.*' -not -path '*/node_modules*' -not -path '*/venv*' | head -n 40",
+            repo_path,
+        ).stdout.strip()
+
+        prompt = f"""You are an elite autonomous principal engineer working on the repository '{target['repo_name']}'.
+Target repository description: {target['description']}
+Date: {target['date']} ({target['weekday']})
+Quarter: {target['quarter']}
+Scheduled Archetype: {target['archetype']['name']}
+Target Deliverable Scope: {target['archetype']['deliverables']}
+
+Repository structure sample:
+{file_tree}
+
+TASK:
+Produce exactly one high-leverage, concrete micro-engineering addition (e.g. a complete unit test file, a typed schema/interface contract, a mathematical utility, an error boundary, or a UI component) that advances this repository cleanly along this deliverable.
+Do NOT output placeholders, TODOs, or markdown whitespace.
+The addition must be production-ready and fully written.
+
+Return ONLY a JSON object with this exact schema:
+{{
+  "file_path": "relative/path/to/file",
+  "content": "Full source code here",
+  "commit_message": "type(scope): concise conventional commit description",
+  "description": "Short explanation of what was built"
+}}
+"""
+        response = client.models.generate_content(
+            model="gemini-2.5-flash",
+            contents=prompt,
+            config=types.GenerateContentConfig(
+                response_mime_type="application/json",
+                temperature=0.2,
+            ),
+        )
+        data = json.loads(response.text)
+        return data
+    except Exception as e:
+        print(f"! Error during Gemini micro-deliverable generation: {e}")
+        return None
+
+
+def execute_daily_run(
+    target_repo_override: Optional[str] = None, dry_run: bool = False, auto_generate: bool = True
+):
+    load_environment()
     schedule = load_schedule()
     target = determine_todays_target(schedule, target_repo_override)
 
@@ -111,26 +189,49 @@ def execute_daily_run(target_repo_override: Optional[str] = None, dry_run: bool 
 
     # 2. Check git status
     status = run_command("git status --porcelain", repo_path).stdout.strip()
+    commit_msg = None
+
+    if not status and auto_generate:
+        print(f"Repository {target['repo_name']} working tree is clean. Generating autonomous deliverable...")
+        gen_result = generate_micro_deliverable(target)
+        if gen_result and "file_path" in gen_result and "content" in gen_result:
+            target_file = os.path.join(repo_path, gen_result["file_path"])
+            os.makedirs(os.path.dirname(target_file), exist_ok=True)
+            with open(target_file, "w", encoding="utf-8") as f:
+                f.write(gen_result["content"])
+            commit_msg = gen_result.get("commit_message")
+            print(f"✓ Generated micro-engineering deliverable: {gen_result['file_path']}")
+            print(f"  Summary: {gen_result.get('description', '')}")
+
+            # Re-check status
+            status = run_command("git status --porcelain", repo_path).stdout.strip()
+
     if status:
-        print(f"Detected existing staged/unstaged changes in {target['repo_name']}:\n{status}")
+        print(f"Detected staged/unstaged changes in {target['repo_name']}:\n{status}")
         # Run test suite to verify changes
         if target["test_cmd"]:
+            print(f"Verifying tests against new changes ({target['test_cmd']})...")
             verify_res = run_command(target["test_cmd"], repo_path)
             if verify_res.returncode != 0:
-                print(f"Verification failed after changes:\n{verify_res.stderr}")
+                print(f"! Verification failed after changes:\n{verify_res.stdout}\n{verify_res.stderr}")
+                print("Reverting unverified modifications to preserve branch stability...")
+                run_command("git reset --hard HEAD", repo_path)
+                run_command("git clean -fd", repo_path)
                 sys.exit(1)
+            print("✓ Verification tests passed after changes.")
 
         # Stage and commit
-        commit_type = target["archetype"]["type"].split("_")[0]
-        scope = target["repo_name"].lower().replace("-", "")
-        commit_msg = f"{commit_type}({scope}): automated daily engineering for {target['archetype']['name']}"
+        if not commit_msg:
+            commit_type = target["archetype"]["type"].split("_")[0]
+            scope = target["repo_name"].lower().replace("-", "")
+            commit_msg = f"{commit_type}({scope}): automated daily engineering for {target['archetype']['name']}"
 
         print(f"Committing changes with message: '{commit_msg}'...")
         run_command("git add -A", repo_path)
         commit_res = run_command(f'git commit -m "{commit_msg}"', repo_path)
         print(commit_res.stdout)
 
-        print(f"Pushing to origin main...")
+        print("Pushing to origin main...")
         push_res = run_command("git push origin main", repo_path)
         if push_res.returncode == 0:
             print("✓ Successfully pushed verified commit.")
@@ -141,6 +242,11 @@ def execute_daily_run(target_repo_override: Optional[str] = None, dry_run: bool 
 
 
 if __name__ == "__main__":
-    override = sys.argv[1] if len(sys.argv) > 1 and not sys.argv[1].startswith("--") else None
+    override = None
+    for arg in sys.argv[1:]:
+        if not arg.startswith("--"):
+            override = arg
+            break
     is_dry = "--dry-run" in sys.argv
-    execute_daily_run(target_repo_override=override, dry_run=is_dry)
+    no_gen = "--no-gen" in sys.argv
+    execute_daily_run(target_repo_override=override, dry_run=is_dry, auto_generate=not no_gen)

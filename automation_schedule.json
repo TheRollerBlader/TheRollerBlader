@@ -62,7 +62,7 @@
     "TheRollerBlader": {
       "path": "/Users/krish/Workspace/TheRollerBlader",
       "tier": 5,
-      "test_cmd": "python3 -c 'import os; assert os.path.exists(\"README.md\")'",
+      "test_cmd": "pytest tests/",
       "description": "Central developer profile and portfolio automation hub"
     },
     "flood-alert": {
