@@ -16,6 +16,7 @@ from agent_daily_worker import (
     get_current_quarter,
     determine_todays_target,
     load_environment,
+    generate_fallback_deliverable,
     SCHEDULE_PATH,
 )
 
@@ -72,3 +73,31 @@ def test_environment_loader():
     # If ~/.env exists, verify it loaded
     if os.path.exists("/Users/krish/.env"):
         assert "GEMINI_API_KEY" in os.environ
+
+
+def test_all_mapped_repositories_exist_on_disk():
+    schedule = load_schedule()
+    for name, meta in schedule["repositories"].items():
+        path = meta.get("path")
+        assert path and os.path.isdir(path), f"Repository '{name}' path does not exist on disk: {path}"
+
+
+def test_quarters_reference_valid_repositories():
+    schedule = load_schedule()
+    repos = set(schedule["repositories"].keys())
+    for q_id, q_data in schedule["quarters"].items():
+        for r in q_data.get("primary", []):
+            assert r in repos, f"Quarter {q_id} primary repo '{r}' not in repositories list"
+        for r in q_data.get("secondary", []):
+            assert r in repos, f"Quarter {q_id} secondary repo '{r}' not in repositories list"
+
+
+def test_fallback_deliverable_generator():
+    schedule = load_schedule()
+    target = determine_todays_target(schedule)
+    fallback = generate_fallback_deliverable(target)
+    assert fallback is not None
+    assert "file_path" in fallback
+    assert "content" in fallback
+    assert "commit_message" in fallback
+    assert len(fallback["content"]) > 0

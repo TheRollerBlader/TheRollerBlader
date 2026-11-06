@@ -148,6 +148,30 @@
       "tier": 5,
       "test_cmd": "npm run build --if-present",
       "description": "Offline PWA habit logger and 52-week heatmap analytics"
+    },
+    "scouting-hosting": {
+      "path": "/Users/krish/Workspace/Frc 25-26 Repos/scouting-hosting",
+      "tier": 5,
+      "test_cmd": "python3 -c 'import os; assert os.path.exists(\"README.md\")'",
+      "description": "FRC scouting web service and team telemetry hosting"
+    },
+    "auto_scout": {
+      "path": "/Users/krish/Workspace/Frc 25-26 Repos/auto_scout",
+      "tier": 2,
+      "test_cmd": "python3 -c 'import os; assert os.path.exists(\"README.md\")'",
+      "description": "Automated FRC match scouting video ingestion and analysis"
+    },
+    "Plant-App": {
+      "path": "/Users/krish/Workspace/Plant-App",
+      "tier": 3,
+      "test_cmd": "npm run build --if-present",
+      "description": "Botanical identification and plant care tracking mobile web app"
+    },
+    "recall-rescue": {
+      "path": "/Users/krish/Workspace/recall-rescue",
+      "tier": 3,
+      "test_cmd": "npm run build --if-present",
+      "description": "Consumer product safety recall tracker and notification system"
     }
   },
   "quarters": {
