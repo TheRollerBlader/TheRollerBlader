@@ -15,8 +15,10 @@ from agent_daily_worker import (
     load_schedule,
     get_current_quarter,
     determine_todays_target,
+    get_active_repositories,
     load_environment,
     generate_fallback_deliverable,
+    push_with_retry,
     SCHEDULE_PATH,
 )
 
@@ -68,6 +70,14 @@ def test_target_override():
     assert target["repo_path"] == schedule["repositories"]["SignBridge"]["path"]
 
 
+def test_get_active_repositories():
+    schedule = load_schedule()
+    q1_active = get_active_repositories(schedule, quarter_key="Q1")
+    assert "SignBridge" in q1_active
+    assert "frc-vision-scout" in q1_active
+    assert len(q1_active) >= 4
+
+
 def test_environment_loader():
     load_environment()
     # If ~/.env exists, verify it loaded
@@ -92,12 +102,36 @@ def test_quarters_reference_valid_repositories():
             assert r in repos, f"Quarter {q_id} secondary repo '{r}' not in repositories list"
 
 
-def test_fallback_deliverable_generator():
+def test_fallback_deliverable_generator_multi_archetype():
     schedule = load_schedule()
-    target = determine_todays_target(schedule)
-    fallback = generate_fallback_deliverable(target)
-    assert fallback is not None
-    assert "file_path" in fallback
-    assert "content" in fallback
-    assert "commit_message" in fallback
-    assert len(fallback["content"]) > 0
+    # Test Saturday (types_and_linting)
+    target_sat = determine_todays_target(
+        schedule,
+        target_repo_override="SignBridge",
+        custom_date=datetime.date(2026, 11, 7),
+    )
+    fallback_sat = generate_fallback_deliverable(target_sat)
+    assert fallback_sat is not None
+    assert "file_path" in fallback_sat
+    assert "content" in fallback_sat
+    assert "isDomainEntityContract" in fallback_sat["content"] or "DomainEntityContract" in fallback_sat["content"]
+
+    # Test Friday (testing)
+    target_fri = determine_todays_target(
+        schedule,
+        target_repo_override="frc-vision-scout",
+        custom_date=datetime.date(2026, 11, 6),
+    )
+    fallback_fri = generate_fallback_deliverable(target_fri)
+    assert fallback_fri is not None
+    assert "test" in fallback_fri["file_path"]
+
+    # Test Tuesday (logic)
+    target_tue = determine_todays_target(
+        schedule,
+        target_repo_override="frc-vision-scout",
+        custom_date=datetime.date(2026, 11, 3),
+    )
+    fallback_tue = generate_fallback_deliverable(target_tue)
+    assert fallback_tue is not None
+    assert "compute_running_statistics" in fallback_tue["content"]
