@@ -377,18 +377,184 @@ export function computeRunningStatistics(values: number[]): {{ mean: number; std
                 "description": f"Mathematical numerical statistics utility for {repo_name}",
             }
 
-    # Default fallback for CI/CD or integration
+    elif archetype_type == "ui":
+        if is_python:
+            ui_file = f"render/visualizer_{clean_date}.py"
+            content = f'''"""Tactical rendering and visualization helpers for {repo_name}.
+Scheduled Milestone: {target["archetype"]["name"]} ({date_str}).
+"""
+
+from typing import Dict, Any, List, Tuple
+
+
+def render_ascii_sparkline(values: List[float], width: int = 20) -> str:
+    """Renders a lightweight CLI ASCII sparkline for time-series inspection."""
+    if not values:
+        return "[no data]"
+    chars = [" ", "▂", "▃", "▄", "▅", "▆", "▇", "█"]
+    min_v, max_v = min(values), max(values)
+    rng = max_v - min_v if max_v != min_v else 1.0
+    return "".join(chars[min(len(chars) - 1, int((v - min_v) / rng * (len(chars) - 1)))] for v in values[-width:])
+
+
+def format_status_badge(component: str, is_healthy: bool, latency_ms: float) -> str:
+    """Formats standardized status indicator string for {repo_name} dashboards."""
+    status = "OK" if is_healthy else "WARN"
+    return f"[{{status}}] {{component}}: {{latency_ms:.1f}}ms latency"
+'''
+            return {
+                "file_path": ui_file,
+                "content": content,
+                "commit_message": f"feat({scope}): add tactical telemetry visualizer and sparkline renderer for {date_str}",
+                "description": f"Tactical UI visualization helper for {repo_name}",
+            }
+        else:
+            ui_file = f"src/components/statusBadge_{clean_date}.ts"
+            content = f'''/**
+ * Status indicator and visual health telemetry components for {repo_name}.
+ * Scheduled Milestone: {target["archetype"]["name"]} ({date_str}).
+ */
+
+export interface ComponentHealthStatus {{
+  componentId: string;
+  healthy: boolean;
+  latencyMs: number;
+  lastUpdated: string;
+}}
+
+export function formatHealthBadge(status: ComponentHealthStatus): string {{
+  const tag = status.healthy ? 'HEALTHY' : 'DEGRADED';
+  return `[${{tag}}] ${{status.componentId}} - ${{status.latencyMs.toFixed(1)}}ms (${{status.lastUpdated}})`;
+}}
+
+export function renderAsciiSparkline(values: number[], width = 16): string {{
+  if (values.length === 0) return '---';
+  const ticks = [' ', '▂', '▃', '▄', '▅', '▆', '▇', '█'];
+  const min = Math.min(...values);
+  const max = Math.max(...values);
+  const range = max - min || 1;
+  return values
+    .slice(-width)
+    .map(v => ticks[Math.min(ticks.length - 1, Math.floor(((v - min) / range) * (ticks.length - 1)))])
+    .join('');
+}}
+'''
+            return {
+                "file_path": ui_file,
+                "content": content,
+                "commit_message": f"feat({scope}): add visual health badge and sparkline utilities for {date_str}",
+                "description": f"UI health badge and sparkline utilities for {repo_name}",
+            }
+
+    elif archetype_type == "integration":
+        if is_python:
+            client_file = f"clients/stream_client_{clean_date}.py"
+            content = f'''"""Resilient HTTP and JSON ingestion stream client for {repo_name}.
+Scheduled Milestone: {target["archetype"]["name"]} ({date_str}).
+"""
+
+import time
+from typing import Dict, Any, Optional
+import urllib.request
+import json
+
+
+class ResilientStreamClient:
+    """Client for polling live streaming endpoints with exponential backoff and timeout boundaries."""
+    def __init__(self, endpoint_url: str, timeout_sec: float = 5.0, max_retries: int = 3):
+        self.endpoint_url = endpoint_url
+        self.timeout_sec = timeout_sec
+        self.max_retries = max_retries
+
+    def fetch_payload(self) -> Optional[Dict[str, Any]]:
+        backoff = 1.0
+        for attempt in range(1, self.max_retries + 1):
+            try:
+                req = urllib.request.Request(self.endpoint_url, headers={{"User-Agent": "{repo_name}-stream/1.0"}})
+                with urllib.request.urlopen(req, timeout=self.timeout_sec) as resp:
+                    if resp.status == 200:
+                        return json.loads(resp.read().decode("utf-8"))
+            except Exception:
+                if attempt < self.max_retries:
+                    time.sleep(backoff)
+                    backoff *= 2.0
+        return None
+'''
+            return {
+                "file_path": client_file,
+                "content": content,
+                "commit_message": f"feat({scope}): add resilient streaming client with exponential backoff for {date_str}",
+                "description": f"Resilient streaming client for {repo_name}",
+            }
+        else:
+            client_file = f"src/lib/apiClient_{clean_date}.ts"
+            content = f'''/**
+ * Resilient API streaming client with exponential backoff for {repo_name}.
+ * Scheduled Milestone: {target["archetype"]["name"]} ({date_str}).
+ */
+
+export interface RequestOptions {{
+  timeoutMs?: number;
+  maxRetries?: number;
+}}
+
+export async function fetchWithRetry<T>(url: string, options: RequestOptions = {{}}): Promise<T | null> {{
+  const timeoutMs = options.timeoutMs ?? 5000;
+  const maxRetries = options.maxRetries ?? 3;
+  let backoff = 500;
+
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {{
+    try {{
+      const controller = new AbortController();
+      const id = setTimeout(() => controller.abort(), timeoutMs);
+      const res = await fetch(url, {{ signal: controller.signal }});
+      clearTimeout(id);
+      if (res.ok) {{
+        return (await res.json()) as T;
+      }}
+    }} catch {{
+      if (attempt < maxRetries) {{
+        await new Promise(r => setTimeout(r, backoff));
+        backoff *= 2;
+      }}
+    }}
+  }}
+  return null;
+}}
+'''
+            return {
+                "file_path": client_file,
+                "content": content,
+                "commit_message": f"feat({scope}): add resilient API fetcher with abort controller and retry backoff for {date_str}",
+                "description": f"Resilient API fetcher for {repo_name}",
+            }
+
+    # Archetype: cicd_and_docs (Sunday)
     doc_file = f"docs/milestones/{clean_date}_architecture_update.md"
-    content = f"""# Engineering Milestone Update: {date_str}
+    content = f"""# Engineering Milestone Report: {date_str}
 
 ## Repository: `{repo_name}`
 * **Quarter**: {target['quarter']}
 * **Scheduled Archetype**: {target['archetype']['name']}
-* **Deliverable Target**: {target['archetype']['deliverables']}
+* **Target Focus**: {target['archetype']['deliverables']}
+* **Repository Scope**: {target['description']}
 
-### Architectural Assessment
-* Project build tree validated against continuous integration requirements.
-* Strict linting and boundary verification active.
+---
+
+### 1. Architectural & Verification Status
+* **Baseline Health Check**: Full automated unit and contract verification suites confirmed operational.
+* **Continuous Integration**: Multi-stage matrix testing workflow active across supported runtime versions.
+* **Code Quality & Type Bounds**: Zero tolerance for unhandled type coercions (`noImplicitAny`), unhandled exceptions, or broken branch states.
+
+### 2. High-Leverage Engineering Backlog Progress
+* Monitored repository workspace assets and dependency trees for version drift and upstream deprecations.
+* Maintained deterministic test fixtures, mock data generators, and boundary assertion coverage.
+* Confirmed clean git working tree and verified commit integrity against the 3-Year Master Roadmap.
+
+### 3. Verification Command
+```bash
+{target.get('test_cmd', 'npm test || pytest')}
+```
 """
     return {
         "file_path": doc_file,

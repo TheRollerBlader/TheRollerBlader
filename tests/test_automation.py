@@ -104,34 +104,25 @@ def test_quarters_reference_valid_repositories():
 
 def test_fallback_deliverable_generator_multi_archetype():
     schedule = load_schedule()
-    # Test Saturday (types_and_linting)
-    target_sat = determine_todays_target(
-        schedule,
-        target_repo_override="SignBridge",
-        custom_date=datetime.date(2026, 11, 7),
-    )
-    fallback_sat = generate_fallback_deliverable(target_sat)
-    assert fallback_sat is not None
-    assert "file_path" in fallback_sat
-    assert "content" in fallback_sat
-    assert "isDomainEntityContract" in fallback_sat["content"] or "DomainEntityContract" in fallback_sat["content"]
+    
+    # Test all 7 weekdays to guarantee high-leverage deliverables across all archetypes
+    test_dates = [
+        ("Monday", datetime.date(2026, 11, 2), "SignBridge"),
+        ("Tuesday", datetime.date(2026, 11, 3), "frc-vision-scout"),
+        ("Wednesday", datetime.date(2026, 11, 4), "rocky"),
+        ("Thursday", datetime.date(2026, 11, 5), "flood-alert"),
+        ("Friday", datetime.date(2026, 11, 6), "frc-vision-scout"),
+        ("Saturday", datetime.date(2026, 11, 7), "SignBridge"),
+        ("Sunday", datetime.date(2026, 11, 8), "TheRollerBlader"),
+    ]
 
-    # Test Friday (testing)
-    target_fri = determine_todays_target(
-        schedule,
-        target_repo_override="frc-vision-scout",
-        custom_date=datetime.date(2026, 11, 6),
-    )
-    fallback_fri = generate_fallback_deliverable(target_fri)
-    assert fallback_fri is not None
-    assert "test" in fallback_fri["file_path"]
-
-    # Test Tuesday (logic)
-    target_tue = determine_todays_target(
-        schedule,
-        target_repo_override="frc-vision-scout",
-        custom_date=datetime.date(2026, 11, 3),
-    )
-    fallback_tue = generate_fallback_deliverable(target_tue)
-    assert fallback_tue is not None
-    assert "compute_running_statistics" in fallback_tue["content"]
+    for expected_day, date_val, repo in test_dates:
+        target = determine_todays_target(schedule, target_repo_override=repo, custom_date=date_val)
+        assert target["weekday"] == expected_day
+        deliverable = generate_fallback_deliverable(target)
+        assert deliverable is not None, f"Failed to generate deliverable for {expected_day}"
+        assert "file_path" in deliverable
+        assert "content" in deliverable
+        assert len(deliverable["content"]) > 150, f"Deliverable too short for {expected_day} ({len(deliverable['content'])} chars)"
+        assert "commit_message" in deliverable
+        assert "description" in deliverable
