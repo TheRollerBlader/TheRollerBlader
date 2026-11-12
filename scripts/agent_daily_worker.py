@@ -108,6 +108,37 @@ def get_active_repositories(schedule: Dict[str, Any], quarter_key: Optional[str]
     return result
 
 
+def get_rotating_repositories(schedule: Dict[str, Any], custom_date: Optional[datetime.date] = None) -> List[str]:
+    """Returns today's rotating engineering slice across the 3-Year Master Roadmap:
+    - 1 Primary repository from current quarter
+    - 1 Secondary repository from current quarter
+    - 2 Rotating repositories from the other tiers across the 22-repo catalog
+    Ensures every single repository across the entire portfolio makes steady micro-commits each week.
+    """
+    today = custom_date or datetime.date.today()
+    q_key = get_current_quarter(today)
+    q_info = schedule.get("quarters", {}).get(q_key, {})
+    primary = q_info.get("primary", ["SignBridge", "frc-vision-scout"])
+    secondary = q_info.get("secondary", ["TheRollerBlader", "rocky", "flood-alert"])
+    all_repos = list(schedule.get("repositories", {}).keys())
+
+    # 1. Primary target of current quarter
+    prim_target = primary[today.day % len(primary)] if primary else None
+    # 2. Secondary target of current quarter
+    sec_target = secondary[today.day % len(secondary)] if secondary else None
+
+    # 3. Rotating target from rest of ecosystem
+    other_repos = [r for r in all_repos if r not in primary and r not in secondary]
+    other_target1 = other_repos[today.day % len(other_repos)] if other_repos else None
+    other_target2 = other_repos[(today.day + 7) % len(other_repos)] if len(other_repos) > 1 else None
+
+    chosen = []
+    for r in [prim_target, sec_target, other_target1, other_target2]:
+        if r and r not in chosen and r in schedule.get("repositories", {}):
+            chosen.append(r)
+    return chosen
+
+
 def run_command(cmd: str, cwd: str) -> subprocess.CompletedProcess:
     env = os.environ.copy()
     env["PATH"] = (
@@ -658,12 +689,15 @@ def execute_daily_run(
     auto_generate: bool = True,
     run_all_active: bool = False,
     run_all_repos: bool = False,
+    run_rotate: bool = False,
 ):
     load_environment()
     schedule = load_schedule()
 
     if run_all_repos:
         repos_to_run = list(schedule.get("repositories", {}).keys())
+    elif run_rotate:
+        repos_to_run = get_rotating_repositories(schedule)
     elif run_all_active:
         repos_to_run = get_active_repositories(schedule)
     elif target_repo_override:
@@ -684,6 +718,7 @@ if __name__ == "__main__":
     no_gen = "--no-gen" in sys.argv
     all_active = "--all-active" in sys.argv
     all_repos = "--all" in sys.argv
+    rotate = "--rotate" in sys.argv
 
     for arg in sys.argv[1:]:
         if not arg.startswith("--"):
@@ -696,4 +731,5 @@ if __name__ == "__main__":
         auto_generate=not no_gen,
         run_all_active=all_active,
         run_all_repos=all_repos,
+        run_rotate=rotate,
     )

@@ -16,6 +16,7 @@ from agent_daily_worker import (
     get_current_quarter,
     determine_todays_target,
     get_active_repositories,
+    get_rotating_repositories,
     load_environment,
     generate_fallback_deliverable,
     push_with_retry,
@@ -76,6 +77,15 @@ def test_get_active_repositories():
     assert "SignBridge" in q1_active
     assert "frc-vision-scout" in q1_active
     assert len(q1_active) >= 4
+
+
+def test_get_rotating_repositories():
+    schedule = load_schedule()
+    rotating = get_rotating_repositories(schedule, custom_date=datetime.date(2026, 11, 12))
+    assert len(rotating) >= 3
+    assert len(rotating) == len(set(rotating)), "Rotating repos must be deduplicated"
+    for r in rotating:
+        assert r in schedule["repositories"]
 
 
 def test_environment_loader():
