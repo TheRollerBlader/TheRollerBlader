@@ -136,3 +136,19 @@ def test_fallback_deliverable_generator_multi_archetype():
         assert len(deliverable["content"]) > 150, f"Deliverable too short for {expected_day} ({len(deliverable['content'])} chars)"
         assert "commit_message" in deliverable
         assert "description" in deliverable
+
+
+def test_friday_testing_archetype_produces_no_dummy_strings():
+    schedule = load_schedule()
+    # Test Python repo
+    target_py = determine_todays_target(schedule, target_repo_override="frc-vision-scout", custom_date=datetime.date(2026, 11, 13))
+    deliv_py = generate_fallback_deliverable(target_py)
+    assert "assert os.path.exists(\"README.md\")" not in deliv_py["content"], "Must not produce dummy README checks"
+    assert "TestDailyInvariantVerification" in deliv_py["content"]
+
+    # Test TS repo without vitest (e.g. global-earthquake-live-map)
+    target_ts = determine_todays_target(schedule, target_repo_override="global-earthquake-live-map", custom_date=datetime.date(2026, 11, 13))
+    deliv_ts = generate_fallback_deliverable(target_ts)
+    assert "from 'vitest'" not in deliv_ts["content"], "Must not import uninstalled vitest in build-only TS repo"
+    assert "verifyNumericalBounds" in deliv_ts["content"]
+
