@@ -152,3 +152,29 @@ def test_friday_testing_archetype_produces_no_dummy_strings():
     assert "from 'vitest'" not in deliv_ts["content"], "Must not import uninstalled vitest in build-only TS repo"
     assert "verifyNumericalBounds" in deliv_ts["content"]
 
+
+def test_safety_guard_skips_dirty_repositories(monkeypatch):
+    from agent_daily_worker import execute_single_repo_run
+    import subprocess
+
+    target = {
+        "date": "2026-11-14",
+        "weekday": "Saturday",
+        "quarter": "Q1",
+        "archetype": {"name": "Type Safety", "type": "types_and_linting", "deliverables": "contracts"},
+        "repo_name": "mock-repo",
+        "repo_path": "/tmp",
+        "test_cmd": "",
+    }
+
+    # Simulate dirty working tree
+    def mock_run_command(cmd, cwd):
+        if "git status --porcelain" in cmd:
+            return subprocess.CompletedProcess(args=cmd, returncode=0, stdout=" M dirty_file.py\n", stderr="")
+        return subprocess.CompletedProcess(args=cmd, returncode=0, stdout="", stderr="")
+
+    monkeypatch.setattr("agent_daily_worker.run_command", mock_run_command)
+    # Must return cleanly without modifying or committing anything
+    execute_single_repo_run(target, dry_run=False, auto_generate=True)
+
+

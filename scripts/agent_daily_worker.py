@@ -700,10 +700,13 @@ def execute_single_repo_run(
         return
 
     # 2. Check git status
-    status = run_command("git status --porcelain", repo_path).stdout.strip()
-    commit_msg = None
+    initial_status = run_command("git status --porcelain", repo_path).stdout.strip()
+    if initial_status:
+        print(f"! Repository '{target['repo_name']}' has pre-existing uncommitted changes. Skipping automated turn to protect local work.")
+        return
 
-    if not status and auto_generate:
+    commit_msg = None
+    if auto_generate:
         print(f"Repository {target['repo_name']} working tree is clean. Generating autonomous deliverable...")
         gen_result = generate_micro_deliverable(target)
         if not gen_result:
