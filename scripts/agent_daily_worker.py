@@ -374,7 +374,82 @@ export function verifyLinearInterpolation(a: number, b: number, t: number): numb
     elif archetype_type in ("types_and_linting", "architecture"):
         if is_python:
             schema_file = f"contracts/domain_contract_{clean_date}.py"
-            content = f'''"""Strict type-safe domain contract and runtime validation for {repo_name}.
+            if repo_name == "SignBridge":
+                content = f'''"""Strict type-safe ASL hand landmark tensor contract for SignBridge.
+Scheduled Milestone: {target["archetype"]["name"]} ({date_str}).
+"""
+
+from typing import List, Optional
+from pydantic import BaseModel, Field, model_validator
+
+
+class LandmarkPoint3D(BaseModel):
+    x: float = Field(..., ge=0.0, le=1.0, description="Normalized X coordinate")
+    y: float = Field(..., ge=0.0, le=1.0, description="Normalized Y coordinate")
+    z: float = Field(..., description="Camera-relative depth Z")
+
+
+class ASLLandmarkTensorContract(BaseModel):
+    """Guarantees strict 21-keypoint MediaPipe hand landmark topology."""
+    milestone_date: str = Field(default="{date_str}")
+    frame_index: int = Field(default=0, ge=0)
+    landmarks: List[LandmarkPoint3D] = Field(..., min_length=21, max_length=21)
+    confidence: float = Field(..., ge=0.0, le=1.0)
+
+    @model_validator(mode="after")
+    def validate_spatial_bounds(self) -> "ASLLandmarkTensorContract":
+        if self.confidence < 0.3:
+            raise ValueError("Inference confidence below minimum tracking threshold (0.3)")
+        return self
+'''
+            elif repo_name in ("frc-vision-scout", "auto_scout"):
+                content = f'''"""Strict type-safe homography coordinate bounds for {repo_name}.
+Scheduled Milestone: {target["archetype"]["name"]} ({date_str}).
+"""
+
+from typing import Tuple, List
+from pydantic import BaseModel, Field, model_validator
+
+
+class PlanarPoint2D(BaseModel):
+    u: float = Field(..., ge=0.0, description="Image horizontal pixel")
+    v: float = Field(..., ge=0.0, description="Image vertical pixel")
+
+
+class FRCFieldCalibrationContract(BaseModel):
+    """Guarantees 4 non-degenerate calibration points mapping camera to field space."""
+    milestone_date: str = Field(default="{date_str}")
+    camera_id: str = Field(..., min_length=1)
+    resolution: Tuple[int, int] = Field(default=(1920, 1080))
+    image_corners: List[PlanarPoint2D] = Field(..., min_length=4, max_length=4)
+
+    @model_validator(mode="after")
+    def validate_non_degenerate(self) -> "FRCFieldCalibrationContract":
+        u_vals = [p.u for p in self.image_corners]
+        v_vals = [p.v for p in self.image_corners]
+        if max(u_vals) - min(u_vals) < 50 or max(v_vals) - min(v_vals) < 50:
+            raise ValueError("Calibration bounding area is degenerate or collapsed")
+        return self
+'''
+            elif repo_name == "st-pc-uq-gkan":
+                content = f'''"""Strict type-safe geomagnetic storm prediction contract for {repo_name}.
+Scheduled Milestone: {target["archetype"]["name"]} ({date_str}).
+"""
+
+from typing import List, Tuple
+from pydantic import BaseModel, Field
+
+
+class GeomagneticHazardContract(BaseModel):
+    """Validates ground magnetometer station delta-B vector bounds."""
+    milestone_date: str = Field(default="{date_str}")
+    station_id: str = Field(..., min_length=3, max_length=6)
+    delta_b_nt_per_min: float = Field(..., description="Rate of magnetic field perturbation")
+    uncertainty_conformal_interval: Tuple[float, float] = Field(...)
+    is_gic_alert: bool = Field(default=False)
+'''
+            else:
+                content = f'''"""Strict type-safe domain contract and runtime validation for {repo_name}.
 Scheduled Milestone: {target["archetype"]["name"]} ({date_str}).
 """
 
@@ -400,7 +475,65 @@ class DomainEntityContract(BaseModel):
             }
         else:
             schema_file = f"src/contracts/domainContract_{clean_date}.ts"
-            content = f'''/**
+            if repo_name == "flood-alert":
+                content = f'''/**
+ * Strict type-safe USGS stream gauge and low-water crossing contract for {repo_name}.
+ * Scheduled Milestone: {target["archetype"]["name"]} ({date_str}).
+ */
+
+export interface StreamGaugeAlarmContract {{
+  gaugeId: string;
+  milestoneDate: string;
+  streamName: string;
+  stageHeightFeet: number;
+  floodActionStageFeet: number;
+  dischargeCfs: number;
+  isHazardActive: boolean;
+}}
+
+export function isStreamGaugeAlarm(obj: unknown): obj is StreamGaugeAlarmContract {{
+  if (!obj || typeof obj !== 'object') return false;
+  const o = obj as Record<string, unknown>;
+  return (
+    typeof o.gaugeId === 'string' &&
+    typeof o.stageHeightFeet === 'number' &&
+    typeof o.floodActionStageFeet === 'number' &&
+    typeof o.isHazardActive === 'boolean' &&
+    o.stageHeightFeet >= 0
+  );
+}}
+'''
+            elif repo_name == "spotify-listening-dashboard":
+                content = f'''/**
+ * Strict type-safe Spotify track acoustic feature contract for {repo_name}.
+ * Scheduled Milestone: {target["archetype"]["name"]} ({date_str}).
+ */
+
+export interface SpotifyAudioFeaturesContract {{
+  trackId: string;
+  milestoneDate: string;
+  danceability: number;
+  energy: number;
+  valence: number;
+  tempoBpm: number;
+}}
+
+export function isAudioFeaturesContract(obj: unknown): obj is SpotifyAudioFeaturesContract {{
+  if (!obj || typeof obj !== 'object') return false;
+  const o = obj as Record<string, unknown>;
+  return (
+    typeof o.trackId === 'string' &&
+    typeof o.danceability === 'number' &&
+    typeof o.energy === 'number' &&
+    typeof o.valence === 'number' &&
+    o.danceability >= 0 && o.danceability <= 1 &&
+    o.energy >= 0 && o.energy <= 1 &&
+    o.valence >= 0 && o.valence <= 1
+  );
+}}
+'''
+            else:
+                content = f'''/**
  * Strict type-safe domain contract and runtime validation for {repo_name}.
  * Scheduled Milestone: {target["archetype"]["name"]} ({date_str}).
  */
