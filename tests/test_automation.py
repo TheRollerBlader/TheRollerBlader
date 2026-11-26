@@ -178,3 +178,31 @@ def test_safety_guard_skips_dirty_repositories(monkeypatch):
     execute_single_repo_run(target, dry_run=False, auto_generate=True)
 
 
+def test_sync_profile_status_updates_readme_idempotently(tmp_path):
+    from pathlib import Path
+    from sync_profile_status import update_readme_status, START_MARKER, END_MARKER
+
+    readme_copy = tmp_path / "README.md"
+    readme_copy.write_text("# Profile\n\nExisting content.\n", encoding="utf-8")
+    schedule_path = Path(BASE_DIR) / "automation_schedule.json"
+
+    first = update_readme_status(
+        readme_path=readme_copy,
+        schedule_path=schedule_path,
+        target_date=datetime.date(2026, 11, 26),
+    )
+    assert START_MARKER in first and END_MARKER in first
+    assert "Integration & Data Ingest" in first
+    assert "`SignBridge`" in first
+
+    # Running a second time replaces the bounded block without duplicating it
+    second = update_readme_status(
+        readme_path=readme_copy,
+        schedule_path=schedule_path,
+        target_date=datetime.date(2026, 11, 27),
+    )
+    assert second.count(START_MARKER) == 1
+    assert second.count(END_MARKER) == 1
+    assert "2026-11-27" in second
+
+

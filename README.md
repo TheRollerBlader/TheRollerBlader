@@ -60,3 +60,16 @@ m......-....................:..-%     . Lines of Code on GitHub: 148,520 ( 174,8
 * **[DriveLab](https://driverlab.netlify.app)** — *Founder*. Volunteer-led engineering nonprofit (501(c)(3) pending) in Prosper, TX teaching grades 6–8 mechanical and electrical fundamentals through an 8-session RC car build curriculum and district race day.
 * **Mercs Robotics ([MercsMavs-MSA](https://github.com/MercsMavs-MSA)) & [Prosper Engineering](https://github.com/Prosper-FRC)** — *AI Lead*. Leading computer vision and autonomous scouting software for competitive FIRST Robotics Competition teams.
 * **[Rock Hill ARC Rocketry](https://rocky-rocketry.netlify.app/#team)** — *Founder & Lead Designer*. Established Rock Hill High School's 9-member American Rocketry Challenge team; leads airframe CAD, stability modeling, and flight simulation.
+
+<!-- AUTOMATION_STATUS:START -->
+### Autonomous Engineering Roadmap Status
+
+| Metric | Active Configuration |
+| :--- | :--- |
+| **Active Quarter** | `Q1` — Ecosystem Engineering |
+| **Primary Focus** | `SignBridge`, `frc-vision-scout` |
+| **Secondary Maintenance** | `TheRollerBlader`, `rocky`, `flood-alert` |
+| **Daily Cadence (Thursday)** | **Integration & Data Ingest** — API endpoints, WebSocket clients, external data fetchers, state management |
+| **Tracked Repositories** | 22 repositories |
+| **Last Synced** | `2026-11-26` |
+<!-- AUTOMATION_STATUS:END -->
